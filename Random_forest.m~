@@ -7,13 +7,13 @@
 % 15/05/2015
 
 clear 
-close allR
+close all
 clc
 rng(1) % For reproducibility
+warning('off', 'MATLAB:table:ModifiedVarnames'); % Do not print warnings
 
 nruns = 200;
 ntrees = 10000;
-% Set up parallel options for TreeBagger function
 paroptions = statset('UseParallel',true, 'UseSubstreams',false);
 
 % Load data
@@ -23,7 +23,8 @@ test =readtable('Data/test.csv');
 % Get features for training and testing
 X_ts = rrp_extract_features(test);
 
-% Initialize array
+
+% Initialize arrays
 prediction_test = zeros(size(X_ts,1), nruns);
 
 % Go 
@@ -44,11 +45,11 @@ for jj = 1:1:nruns
 end % For all runs
 
 prediction_test = exp(prediction_test);
-final_prediction = mean(prediction_test,2);
 
-% Create a submission file
-Id = (0:1:99999)';
-T = table(Id, final_prediction);
-writetable(T,'submission.csv')
+Options.numruns = nruns;
+Options.featNames = feat_names;
+Results.predictedTs = prediction_test;
+Results.ooberr = oob_err;
+save(strcat('Random_forests_',date), 'Results', 'Options')
 
         
