@@ -17,8 +17,8 @@ ntrees = 10000;
 paroptions = statset('UseParallel',true, 'UseSubstreams',false);
 
 % Load data
-train =readtable('Data/train.csv');
-test =readtable('Data/test.csv');
+train =readtable('train.csv');
+test =readtable('test.csv');
 
 % Get features for training and testing
 X_ts = rrp_extract_features(test);
