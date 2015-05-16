@@ -10,6 +10,6 @@ This solution uses an ensemble of Random forests. In each iteration, the trainin
 ## Instructions:
 
 1. MATLAB and Statistics and Machine Learning Toolbox are required.
-2. Download data from competition website and place them into the Data folder. Make sure to add the Data and Code folders into MATLAB path.
+2. Download data from competition website and place them into the same folder.
 3. Run Random_forest.m
 
